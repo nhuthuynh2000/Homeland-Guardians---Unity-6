@@ -21,11 +21,15 @@ namespace RPG.Controll
             inputActions.Player.Move.canceled += OnMove;
         }
 
+        private void OnEnable()
+        {
+            inputActions.Enable();
+
+        }
         private void Start()
         {
             mover = GetComponent<Mover>();
             health = GetComponent<Health>();
-            inputActions.Enable();
         }
         private void Update()
         {
