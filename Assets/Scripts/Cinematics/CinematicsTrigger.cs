@@ -4,7 +4,7 @@ namespace RPG.Cinematics
 {
     public class CinematicsTrigger : MonoBehaviour
     {
-        bool hasTriggered = false;
+        static bool hasTriggered = false;
         private void OnTriggerEnter(Collider other)
         {
             if (!hasTriggered && other.gameObject.CompareTag("Player"))
