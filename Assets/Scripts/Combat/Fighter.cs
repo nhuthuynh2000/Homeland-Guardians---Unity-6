@@ -93,11 +93,20 @@ namespace RPG.Combat
             return targetHealth != null && !targetHealth.IsDead;
         }
 
-        //Animation Event
+        //Animation Event ===========================================================================
         private void Hit()
         {
             if (target == null) return;
             target.TakeDamage(weapon.GetDamage());
+        }
+
+        private void FootL()
+        {
+            return;
+        }
+        private void FootR()
+        {
+            return;
         }
     }
 }
