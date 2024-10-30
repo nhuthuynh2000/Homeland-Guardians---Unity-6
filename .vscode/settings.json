@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Homeland-Guardians---Unity-6.sln"
+    "dotnet.defaultSolution": "Homeland Guardians - Unity 6.sln"
 }
