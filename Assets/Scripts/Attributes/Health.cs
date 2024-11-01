@@ -41,7 +41,6 @@ namespace RPG.Attributes
         {
             print(gameObject.name + " took damage: " + amountDamage);
             healthPoints.value = Mathf.Max(healthPoints.value - amountDamage, 0);
-            print(healthPoints);
             if (!isDead && healthPoints.value == 0)
             {
                 Die();

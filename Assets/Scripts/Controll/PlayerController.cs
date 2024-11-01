@@ -13,13 +13,6 @@ namespace RPG.Controll
 {
     public class PlayerController : MonoBehaviour
     {
-        enum CursorType
-        {
-            None,
-            Movement,
-            Combat,
-            UI
-        }
         [System.Serializable]
         struct CursorMapping
         {
@@ -29,26 +22,12 @@ namespace RPG.Controll
         }
         [SerializeField] CursorMapping[] cursorMappings = null;
         Mover mover;
-        Fighter fighter;
-        InputSystem_Actions inputActions;
 
         Health health;
-        Ray lastRay;
-        bool isClicked = false;
         private void Awake()
         {
-            inputActions = new InputSystem_Actions();
-            inputActions.Player.Move.performed += OnMove;
-            inputActions.Player.Move.canceled += OnMove;
             mover = GetComponent<Mover>();
             health = GetComponent<Health>();
-            fighter = GetComponent<Fighter>();
-        }
-
-        private void OnEnable()
-        {
-            inputActions.Enable();
-
         }
         private void Start()
         {
@@ -66,36 +45,35 @@ namespace RPG.Controll
                 SetCursor(CursorType.None);
                 return;
             }
-
-            if (InteractWithCombat()) return;
+            if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
 
             SetCursor(CursorType.None);
         }
 
+
         private bool InteractWithUI()
         {
             return EventSystem.current.IsPointerOverGameObject();
         }
-
-        private bool InteractWithCombat()
+        private bool InteractWithComponent()
         {
             RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
             foreach (RaycastHit hit in hits)
             {
-                CombatTarget combatTarget = hit.transform.GetComponent<CombatTarget>();
-                if (combatTarget == null) continue;
-                if (!fighter.CanAttack(combatTarget.gameObject)) continue;
-                if (isClicked)
+                IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
+                foreach (IRaycastable raycastable in raycastables)
                 {
-                    fighter.Attack(combatTarget.gameObject);
-                    isClicked = false;
+                    if (raycastable.HandleRaycast(this))
+                    {
+                        SetCursor(raycastable.GetCursorType());
+                        return true;
+                    }
                 }
-                SetCursor(CursorType.Combat);
-                return true;
             }
             return false;
         }
+
 
 
 
@@ -105,7 +83,7 @@ namespace RPG.Controll
             bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
             if (hasHit)
             {
-                if (isClicked)
+                if (Input.GetMouseButton(1))
                 {
                     mover.StartMoveAction(hit.point, 1f);
                 }
@@ -135,24 +113,6 @@ namespace RPG.Controll
         private static Ray GetMouseRay()
         {
             return Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        }
-
-        private void OnMove(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                isClicked = true;
-            }
-            else if (context.canceled)
-            {
-                isClicked = false;
-            }
-        }
-
-
-        private void OnDisable()
-        {
-            inputActions.Disable();
         }
     }
 }

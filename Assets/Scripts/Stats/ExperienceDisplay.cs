@@ -13,7 +13,7 @@ namespace RPG.Stats
         }
         private void Update()
         {
-            GetComponent<TextMeshProUGUI>().text = experience.GetExperiencePoint().ToString(); ;
+            //GetComponent<TextMeshProUGUI>().text = experience.GetExperiencePoint().ToString(); ;
         }
     }
 }
