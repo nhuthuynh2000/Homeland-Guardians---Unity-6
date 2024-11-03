@@ -50,7 +50,7 @@ namespace RPG.SceneManagement
             UpdatePlayer(otherPortal);
             savingWrapper.Save();
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
             GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = true;
             Destroy(gameObject);
         }
