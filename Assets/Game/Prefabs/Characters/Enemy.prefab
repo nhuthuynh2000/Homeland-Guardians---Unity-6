@@ -186,6 +186,38 @@ PrefabInstance:
       propertyPath: health
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1363947808658326635, guid: be2f13b9b37e3a446a19be6c93b941ec, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363947808658326635, guid: be2f13b9b37e3a446a19be6c93b941ec, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363947808658326635, guid: be2f13b9b37e3a446a19be6c93b941ec, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 6357242578446972941}
+    - target: {fileID: 1363947808658326635, guid: be2f13b9b37e3a446a19be6c93b941ec, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363947808658326635, guid: be2f13b9b37e3a446a19be6c93b941ec, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Aggrevate
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363947808658326635, guid: be2f13b9b37e3a446a19be6c93b941ec, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: RPG.Controll.AIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363947808658326635, guid: be2f13b9b37e3a446a19be6c93b941ec, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_FloatArgument
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363947808658326635, guid: be2f13b9b37e3a446a19be6c93b941ec, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2469731667578073566, guid: be2f13b9b37e3a446a19be6c93b941ec, type: 3}
       propertyPath: maxSpeed
       value: 4

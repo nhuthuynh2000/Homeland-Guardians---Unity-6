@@ -1,5 +1,45 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1059623098735841719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9144319546355289684}
+  - component: {fileID: 3936362281097562826}
+  m_Layer: 0
+  m_Name: Mic Boom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9144319546355289684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059623098735841719}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.49, z: 8.14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5856194135976789055}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &3936362281097562826
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059623098735841719}
+  m_Enabled: 1
 --- !u!1 &3515346319348944072
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +50,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5856194135976789055}
   - component: {fileID: 8216956481307828199}
-  - component: {fileID: 1225307005998017177}
   - component: {fileID: 5802223723485401900}
   - component: {fileID: 3601117024391676830}
   m_Layer: 0
@@ -29,10 +68,11 @@ Transform:
   m_GameObject: {fileID: 3515346319348944072}
   serializedVersion: 2
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 33.9, y: 8.860446, z: -36.72788}
+  m_LocalPosition: {x: -2.8800006, y: 14.560447, z: -31.787882}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9144319546355289684}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 54.4, y: 15.07, z: 0}
 --- !u!20 &8216956481307828199
@@ -86,14 +126,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1225307005998017177
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515346319348944072}
-  m_Enabled: 1
 --- !u!114 &5802223723485401900
 MonoBehaviour:
   m_ObjectHideFlags: 0
