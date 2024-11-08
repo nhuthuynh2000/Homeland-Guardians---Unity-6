@@ -30,7 +30,6 @@ namespace RPG.Attributes
         private void Start()
         {
             healthPoints.ForceInit();
-            takeDamage.Invoke(0);
         }
         private void OnEnable()
         {

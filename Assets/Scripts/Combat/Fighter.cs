@@ -131,7 +131,7 @@ namespace RPG.Combat
         public bool CanAttack(GameObject combatTarget)
         {
             if (combatTarget == null) return false;
-            if (!GetComponent<Mover>().CanMoveTo(combatTarget.transform.position) && !GetIsInRange(combatTarget.transform))
+            if (!GetComponent<Mover>().CanMoveTo(combatTarget.transform.position))
             {
                 return false;
 

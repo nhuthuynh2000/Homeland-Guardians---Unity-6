@@ -62,6 +62,7 @@ namespace RPG.Controll
                 PatrolBehaviour();
             }
             UpdateTimer();
+
             Debug.Log(timeSinceAggrevated);
         }
 
@@ -131,6 +132,7 @@ namespace RPG.Controll
             {
                 AIController ai = hit.collider.GetComponent<AIController>();
                 if (ai == null) continue;
+                if (ai.IsAggrevate()) return;
                 ai.Aggrevate();
             }
         }

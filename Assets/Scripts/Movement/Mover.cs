@@ -54,14 +54,11 @@ namespace RPG.Movement
         }
         private float GetPathLength(NavMeshPath path)
         {
-            Vector3[] corners = path.corners;
             float total = 0;
-            if (corners.Length < 2) return total;
-
-
-            for (int i = 0; i < corners.Length - 1; i++)
+            if (path.corners.Length < 2) return total;
+            for (int i = 0; i < path.corners.Length - 1; i++)
             {
-                total += Vector3.Distance(corners[i], corners[i + 1]);
+                total += Vector3.Distance(path.corners[i], path.corners[i + 1]);
             }
             return total;
         }
