@@ -62,8 +62,6 @@ namespace RPG.Controll
                 PatrolBehaviour();
             }
             UpdateTimer();
-
-            Debug.Log(timeSinceAggrevated);
         }
 
         public void Aggrevate()

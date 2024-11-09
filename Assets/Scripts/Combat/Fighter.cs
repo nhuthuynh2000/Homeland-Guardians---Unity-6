@@ -6,6 +6,7 @@ using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
 using RPG.Stats;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -41,8 +42,8 @@ namespace RPG.Combat
         private void Start()
         {
             currentWeapon.ForceInit();
+            Debug.Log(gameObject.name + " attach " + animator);
         }
-
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
