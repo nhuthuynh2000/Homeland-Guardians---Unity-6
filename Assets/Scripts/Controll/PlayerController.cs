@@ -24,41 +24,53 @@ namespace RPG.Controll
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
         [SerializeField] float raycastRadius = 1f;
+
         Mover mover;
 
         Health health;
+        bool movementStarted = false;
+        bool isDraggingUI = false;
         private void Awake()
         {
             mover = GetComponent<Mover>();
             health = GetComponent<Health>();
         }
-        private void Start()
-        {
-
-        }
         private void Update()
         {
-            if (InteractWithUI())
+            if (Input.GetMouseButtonUp(0))
             {
-                SetCursor(CursorType.UI);
-                return;
+                movementStarted = false;
             }
-            if (health.IsDead)
-            {
-                SetCursor(CursorType.None);
-                return;
-            }
+
+            if (InteractWithUI()) return;
             if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
 
             SetCursor(CursorType.None);
         }
 
-
         private bool InteractWithUI()
         {
-            return EventSystem.current.IsPointerOverGameObject();
+            if (Input.GetMouseButtonUp(0))
+            {
+                isDraggingUI = false;
+            }
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    isDraggingUI = true;
+                }
+                SetCursor(CursorType.UI);
+                return true;
+            }
+            if (isDraggingUI)
+            {
+                return true;
+            }
+            return false;
         }
+
         private bool InteractWithComponent()
         {
             RaycastHit[] hits = RaycastAllSorted();
@@ -77,7 +89,7 @@ namespace RPG.Controll
             return false;
         }
 
-        private RaycastHit[] RaycastAllSorted()
+        RaycastHit[] RaycastAllSorted()
         {
             RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), raycastRadius);
             float[] distances = new float[hits.Length];
@@ -96,9 +108,14 @@ namespace RPG.Controll
             if (hasHit)
             {
                 if (!GetComponent<Mover>().CanMoveTo(target)) return false;
-                if (Input.GetMouseButton(1))
+
+                if (Input.GetMouseButtonDown(0))
                 {
-                    mover.StartMoveAction(target, 1f);
+                    movementStarted = true;
+                }
+                if (Input.GetMouseButton(0) && movementStarted)
+                {
+                    GetComponent<Mover>().StartMoveAction(target, 1f);
                 }
                 SetCursor(CursorType.Movement);
                 return true;
@@ -109,19 +126,20 @@ namespace RPG.Controll
         private bool RaycastNavMesh(out Vector3 target)
         {
             target = new Vector3();
+
             RaycastHit hit;
             bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
             if (!hasHit) return false;
-            NavMeshHit navMeshHit;
-            bool hasCastToNavMesh = NavMesh.SamplePosition(hit.point, out navMeshHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
-            if (!hasCastToNavMesh) return false;
-            target = navMeshHit.position;
 
+            NavMeshHit navMeshHit;
+            bool hasCastToNavMesh = NavMesh.SamplePosition(
+                hit.point, out navMeshHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
+            if (!hasCastToNavMesh) return false;
+
+            target = navMeshHit.position;
 
             return true;
         }
-
-
 
         private void SetCursor(CursorType type)
         {
@@ -143,7 +161,7 @@ namespace RPG.Controll
 
         private static Ray GetMouseRay()
         {
-            return Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
     }
 }

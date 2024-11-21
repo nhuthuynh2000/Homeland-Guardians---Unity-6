@@ -1,5 +1,5 @@
 using System;
-using GameDevTV.Utils;
+using RPG.Utils;
 using RPG.Attributes;
 using RPG.Combat;
 using RPG.Core;
@@ -62,8 +62,6 @@ namespace RPG.Controll
                 PatrolBehaviour();
             }
             UpdateTimer();
-
-            Debug.Log(timeSinceAggrevated);
         }
 
         public void Aggrevate()

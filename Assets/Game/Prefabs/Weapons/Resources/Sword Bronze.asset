@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d1ab36c3ba5e6498d78ca5ea0c409a, type: 3}
   m_Name: Sword Bronze
   m_EditorClassIdentifier: 
+  itemID: efb5f746-6a48-4d36-af72-ec9e3d6fdade
+  displayName: Sword Bronze
+  description: 
+  icon: {fileID: 21300000, guid: d19901b0ee3c38743a7d383bd484b0b5, type: 3}
+  pickup: {fileID: 417791183672440564, guid: 85f49b77f7b3b9c45b67117cf54bf88c, type: 3}
+  stackable: 0
+  allowedEquipLocation: 5
   animatorOverride: {fileID: 22100000, guid: f34f3b2309ea1ee4da6f54c798040ef9, type: 2}
   equippedPrefab: {fileID: -765700173112878845, guid: fa80d5edc46c4f346948af35b0eda6fd, type: 3}
   weaponDamage: 4

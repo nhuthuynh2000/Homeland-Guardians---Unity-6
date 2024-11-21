@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
-using GameDevTV.Utils;
+using RPG.Utils;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
 using RPG.Stats;
+using Unity.VisualScripting;
 using UnityEngine;
+using RPG.Inventories;
 
 namespace RPG.Combat
 {
@@ -19,6 +21,7 @@ namespace RPG.Combat
         [SerializeField] WeaponConfig defaultWeapon = null;
 
         Health target;
+        Equipment equipment;
         float timeSinceLastAttack = Mathf.Infinity;
         WeaponConfig currentWeaponConfig;
         LazyValue<Weapon> currentWeapon;
@@ -33,7 +36,26 @@ namespace RPG.Combat
             animator = GetComponent<Animator>();
             currentWeaponConfig = defaultWeapon;
             currentWeapon = new LazyValue<Weapon>(GetDefaultWeapon);
+            equipment = GetComponent<Equipment>();
+            if (equipment)
+            {
+                equipment.equipmentUpdated += UpdateWeapon;
+            }
         }
+
+        private void UpdateWeapon()
+        {
+            var weapon = equipment.GetItemInSlot(EquipLocation.Weapon) as WeaponConfig;
+            if (weapon == null)
+            {
+                EquipWeapon(defaultWeapon);
+            }
+            else
+            {
+                EquipWeapon(weapon);
+            }
+        }
+
         private Weapon GetDefaultWeapon()
         {
             return AttachWeapon(defaultWeapon);
@@ -41,8 +63,8 @@ namespace RPG.Combat
         private void Start()
         {
             currentWeapon.ForceInit();
+            Debug.Log(gameObject.name + " attach " + animator);
         }
-
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;

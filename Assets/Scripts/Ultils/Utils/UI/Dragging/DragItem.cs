@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace GameDevTV.Core.UI.Dragging
+namespace RPG.Core.UI.Dragging
 {
     /// <summary>
     /// Allows a UI element to be dragged and dropped from and to a container.
@@ -73,7 +73,7 @@ namespace GameDevTV.Core.UI.Dragging
                 DropItemIntoContainer(container);
             }
 
-            
+
         }
 
         private IDragDestination<T> GetContainer(PointerEventData eventData)
@@ -95,8 +95,8 @@ namespace GameDevTV.Core.UI.Dragging
             var sourceContainer = source as IDragContainer<T>;
 
             // Swap won't be possible
-            if (destinationContainer == null || sourceContainer == null || 
-                destinationContainer.GetItem() == null || 
+            if (destinationContainer == null || sourceContainer == null ||
+                destinationContainer.GetItem() == null ||
                 object.ReferenceEquals(destinationContainer.GetItem(), sourceContainer.GetItem()))
             {
                 AttemptSimpleTransfer(destination);
@@ -134,10 +134,17 @@ namespace GameDevTV.Core.UI.Dragging
 
             // Abort if we can't do a successful swap
             if (source.MaxAcceptable(removedDestinationItem) < removedDestinationNumber ||
-                destination.MaxAcceptable(removedSourceItem) < removedSourceNumber)
+                destination.MaxAcceptable(removedSourceItem) < removedSourceNumber ||
+                removedSourceNumber == 0)
             {
-                destination.AddItems(removedDestinationItem, removedDestinationNumber);
-                source.AddItems(removedSourceItem, removedSourceNumber);
+                if (removedDestinationNumber > 0)
+                {
+                    destination.AddItems(removedDestinationItem, removedDestinationNumber);
+                }
+                if (removedSourceNumber > 0)
+                {
+                    source.AddItems(removedSourceItem, removedSourceNumber);
+                }
                 return;
             }
 

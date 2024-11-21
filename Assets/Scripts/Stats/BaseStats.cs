@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using GameDevTV.Utils;
+using RPG.Utils;
 using RPG.Attributes;
 using UnityEngine;
 using UnityEngine.AI;

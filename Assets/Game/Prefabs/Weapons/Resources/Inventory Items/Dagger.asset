@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dc047c233344664c9996be4c36379e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 778ee46216a859d46887fcf2f9a15659, type: 3}
   m_Name: Dagger
   m_EditorClassIdentifier: 
-  itemID: 71e73607-4bac-4e42-b7d6-5e6f91e92dc4
+  itemID: c940586d-ff9a-4398-9406-c46d62f71097
   displayName: Dagger
-  description: Pointy and sharp
+  description: Dagger
   icon: {fileID: 21300000, guid: d19901b0ee3c38743a7d383bd484b0b5, type: 3}
   pickup: {fileID: 6494234044896430859, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
   stackable: 0
+  allowedEquipLocation: 5
