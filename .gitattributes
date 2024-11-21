@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+Assets/POLY[[:space:]]STYLE[[:space:]]-[[:space:]]Fantasy[[:space:]]Treasure[[:space:]]Chest/Fantasy[[:space:]]Treasure[[:space:]]Chest_URP/Art/Meshes/Chest/Meshes.fbx filter=lfs diff=lfs merge=lfs -text
+Assets/POLY[[:space:]]STYLE[[:space:]]-[[:space:]]Fantasy[[:space:]]Treasure[[:space:]]Chest/Fantasy[[:space:]]Treasure[[:space:]]Chest_URP/Art/Meshes/DemoScene/Demo.fbx filter=lfs diff=lfs merge=lfs -text
