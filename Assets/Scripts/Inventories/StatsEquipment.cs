@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 using RPG.Inventories;
 using RPG.Stats;
 using UnityEngine;
@@ -7,18 +8,30 @@ namespace RPG.Inventories
 {
     public class StatsEquipment : Equipment, IModifierProvider
     {
-        public IEnumerable<float> GetAdditiveModifier(Stats.Stats stat)
+        public IEnumerable<float> GetAdditiveModifier(Stat stat)
         {
-            return null;
             foreach (var slot in GetAllPopulatedSlots())
             {
-                //
+                var item = GetItemInSlot(slot) as IModifierProvider;
+                if (item == null) continue;
+                foreach (float modifier in item.GetAdditiveModifier(stat))
+                {
+                    yield return modifier;
+                }
             }
         }
 
-        public IEnumerable<float> GetPercentageModifier(Stats.Stats stat)
+        public IEnumerable<float> GetPercentageModifier(Stat stat)
         {
-            throw new System.NotImplementedException();
+            foreach (var slot in GetAllPopulatedSlots())
+            {
+                var item = GetItemInSlot(slot) as IModifierProvider;
+                if (item == null) continue;
+                foreach (float modifier in item.GetPercentageModifier(stat))
+                {
+                    yield return modifier;
+                }
+            }
         }
     }
 

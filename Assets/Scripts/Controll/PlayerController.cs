@@ -73,6 +73,8 @@ namespace RPG.Controll
 
         private bool InteractWithComponent()
         {
+            if (health.IsDead) return false;
+
             RaycastHit[] hits = RaycastAllSorted();
             foreach (RaycastHit hit in hits)
             {
@@ -103,6 +105,7 @@ namespace RPG.Controll
 
         private bool InteractWithMovement()
         {
+            if (health.IsDead) return false;
             Vector3 target;
             bool hasHit = RaycastNavMesh(out target);
             if (hasHit)

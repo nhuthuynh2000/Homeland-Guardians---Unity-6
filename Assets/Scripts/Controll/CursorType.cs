@@ -7,6 +7,8 @@ namespace RPG.Controll
         Combat,
         UI,
         Pickup,
-        FullPickup
+        FullPickup,
+        Dialogue,
+        Shop
     }
 }

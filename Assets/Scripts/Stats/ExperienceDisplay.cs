@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace RPG.Stats
         }
         private void Update()
         {
-            //GetComponent<TextMeshProUGUI>().text = experience.GetExperiencePoint().ToString(); ;
+            GetComponent<TextMeshProUGUI>().text = String.Format("{0:0}", experience.GetExperiencePoint());
         }
     }
 }

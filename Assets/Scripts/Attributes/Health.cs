@@ -25,7 +25,7 @@ namespace RPG.Attributes
         }
         private float GetInitialHealth()
         {
-            return GetComponent<BaseStats>().GetStats(Stats.Stats.Health);
+            return GetComponent<BaseStats>().GetStats(Stat.Health);
         }
         private void Start()
         {
@@ -60,12 +60,12 @@ namespace RPG.Attributes
         }
         public float GetMaxHealthPoints()
         {
-            return GetComponent<BaseStats>().GetStats(Stats.Stats.Health);
+            return GetComponent<BaseStats>().GetStats(Stat.Health);
         }
 
         public void RegenerateHealth()
         {
-            float regenHealthPoints = GetComponent<BaseStats>().GetStats(Stats.Stats.Health) * regenerationPercentage / 100;
+            float regenHealthPoints = GetComponent<BaseStats>().GetStats(Stat.Health) * regenerationPercentage / 100;
             healthPoints.value = Mathf.Max(healthPoints.value, regenHealthPoints);
         }
 
@@ -76,7 +76,7 @@ namespace RPG.Attributes
         }
         public float GetFraction()
         {
-            return healthPoints.value / GetComponent<BaseStats>().GetStats(Stats.Stats.Health);
+            return healthPoints.value / GetComponent<BaseStats>().GetStats(Stat.Health);
         }
         private void Die()
         {
@@ -88,7 +88,7 @@ namespace RPG.Attributes
         {
             Experience experience = instigator.GetComponent<Experience>();
             if (experience == null) return;
-            experience.GainExperience(GetComponent<BaseStats>().GetStats(Stats.Stats.ExperienceReward));
+            experience.GainExperience(GetComponent<BaseStats>().GetStats(Stat.ExperienceReward));
         }
         public void Heal(float healthToRestore)
         {

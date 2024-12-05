@@ -9,8 +9,8 @@ namespace RPG.Stats
     public class Progression : ScriptableObject
     {
         [SerializeField] ProgressionCharacterClass[] characterClasses = null;
-        Dictionary<CharacterClass, Dictionary<Stats, float[]>> lookupTable = null;
-        public float GetStats(Stats stat, CharacterClass characterClass, int level)
+        Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable = null;
+        public float GetStats(Stat stat, CharacterClass characterClass, int level)
         {
             BuildLookup();
 
@@ -25,10 +25,10 @@ namespace RPG.Stats
         private void BuildLookup()
         {
             if (lookupTable != null) return;
-            lookupTable = new Dictionary<CharacterClass, Dictionary<Stats, float[]>>();
+            lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
             foreach (ProgressionCharacterClass progressionClass in characterClasses)
             {
-                var statLookupTable = new Dictionary<Stats, float[]>();
+                var statLookupTable = new Dictionary<Stat, float[]>();
                 foreach (ProgressionStat progressionStat in progressionClass.stats)
                 {
                     statLookupTable[progressionStat.stat] = progressionStat.levels;
@@ -38,7 +38,7 @@ namespace RPG.Stats
             }
         }
 
-        public int GetLevels(Stats stat, CharacterClass characterClass)
+        public int GetLevels(Stat stat, CharacterClass characterClass)
         {
             BuildLookup();
             float[] levels = lookupTable[characterClass][stat];
@@ -55,7 +55,7 @@ namespace RPG.Stats
         [System.Serializable]
         class ProgressionStat
         {
-            public Stats stat;
+            public Stat stat;
             public float[] levels;
         }
     }

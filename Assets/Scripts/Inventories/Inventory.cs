@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using RPG.Saving;
+using RPG.Core;
+using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace RPG.Inventories
 {
@@ -10,7 +14,7 @@ namespace RPG.Inventories
     ///
     /// This component should be placed on the GameObject tagged "Player".
     /// </summary>
-    public class Inventory : MonoBehaviour, ISaveable
+    public class Inventory : MonoBehaviour, ISaveable, IPredicateEvaluator
     {
         // CONFIG DATA
         [Tooltip("Allowed size")]
@@ -47,6 +51,37 @@ namespace RPG.Inventories
         public bool HasSpaceFor(InventoryItem item)
         {
             return FindSlot(item) >= 0;
+        }
+
+        public bool HasSpaceFor(IEnumerable<InventoryItem> items)
+        {
+            int freeSlots = FreeSlots();
+            List<InventoryItem> stackedItems = new List<InventoryItem>();
+            foreach (var item in items)
+            {
+                if (item.IsStackable())
+                {
+                    if (HasItem(item)) continue;
+                    if (stackedItems.Contains(item)) continue;
+                    stackedItems.Add(item);
+                }
+                if (freeSlots <= 0) return false;
+                freeSlots--;
+            }
+            return true;
+        }
+
+        public int FreeSlots()
+        {
+            int count = 0;
+            foreach (InventorySlot slot in slots)
+            {
+                if (slot.number == 0)
+                {
+                    count++;
+                }
+            }
+            return count;
         }
 
         /// <summary>
@@ -252,6 +287,16 @@ namespace RPG.Inventories
             {
                 inventoryUpdated();
             }
+        }
+
+        public bool? Evaluate(string predicate, string[] parameters)
+        {
+            switch (predicate)
+            {
+                case "HasInventoryItem":
+                    return HasItem(InventoryItem.GetFromID(parameters[0]));
+            }
+            return null;
         }
     }
 }

@@ -58,18 +58,18 @@ namespace RPG.Stats
             Instantiate(levelUpEffect, transform);
         }
 
-        public float GetStats(Stats stat)
+        public float GetStats(Stat stat)
         {
             return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat) / 100);
         }
 
 
-        private float GetBaseStat(Stats stat)
+        private float GetBaseStat(Stat stat)
         {
             return progression.GetStats(stat, characterClass, GetLevel());
         }
 
-        private float GetAdditiveModifier(Stats stat)
+        private float GetAdditiveModifier(Stat stat)
         {
             if (!shouldUseModifiers) return 0;
             float total = 0;
@@ -83,7 +83,7 @@ namespace RPG.Stats
             return total;
         }
 
-        private float GetPercentageModifier(Stats stat)
+        private float GetPercentageModifier(Stat stat)
         {
             if (!shouldUseModifiers) return 0;
             float total = 0;
@@ -111,10 +111,10 @@ namespace RPG.Stats
             Experience experience = GetComponent<Experience>();
             if (experience == null) return startingLevel;
             float currentXP = experience.GetExperiencePoint();
-            int penultimateLevel = progression.GetLevels(Stats.ExperienceToLevelUp, characterClass);
+            int penultimateLevel = progression.GetLevels(Stat.ExperienceToLevelUp, characterClass);
             for (int level = 1; level <= penultimateLevel; level++)
             {
-                float xpToLevelUp = progression.GetStats(Stats.ExperienceToLevelUp, characterClass, level);
+                float xpToLevelUp = progression.GetStats(Stat.ExperienceToLevelUp, characterClass, level);
                 if (xpToLevelUp > currentXP)
                 {
                     return level;
